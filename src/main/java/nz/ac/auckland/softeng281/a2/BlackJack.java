@@ -15,7 +15,9 @@ public class BlackJack {
 		players = new ArrayList<>();
 		dealer = null; // FIXME Task 2
 		players.add(new HumanPlayer("Player1"));
-		// ADDHERE Task 1
+		// ADDHERE Task 1 - Task 1 Failure 1, Created 2 test bots in players array list.
+		players.add(new BotPlayer("Bot1"));
+		players.add(new BotPlayer("Bot2"));
 	}
 
 	// getter setter for testing purposes
