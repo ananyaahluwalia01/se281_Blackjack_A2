@@ -12,13 +12,35 @@ public class BotDealer extends Participant {
 
 	public BotDealer(String name, List<Participant> players) {
 		super(name);
+		this.players = players;
 		// ADDHERE
 	}
 
 	@Override
 	public Action decideAction() {
 		// TODO
-		return new Random().nextBoolean() ? Action.HIT : Action.HOLD; // FIXME
+		
+		int[] scores = new int[players.size() - 1];
+
+		for (int i=0; i < players.size()-1; i++) {
+			scores[i] = players.get(i).getCurrentHand().getScore();
+		}
+		
+		int d = getCurrentHand().getScore();
+		
+		int playersBetter = 0;
+		
+		for (int j = 0; j < players.size()-1; j++){
+			if(d < scores[j]) {
+				playersBetter++;
+			}
+		}
+   
+		if (playersBetter >= 2) {
+			return Action.HIT;
+		} else {
+			return Action.HOLD;
+		}
 
 	}
 

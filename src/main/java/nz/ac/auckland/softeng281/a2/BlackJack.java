@@ -77,4 +77,4 @@ public class BlackJack {
 		// System.out.println("The player with the highest gain is: " + name + " with "
 		// + totalGain + " chips"); // UNCOMMENT AND KEEPTHIS
 	}
-}
+} 
