@@ -22,8 +22,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 @RunWith(Suite.class)
-@SuiteClasses({BlackJackTestSuite.Task1Test.class,
-// BlackJackTestSuite.Task2Test.class,
+@SuiteClasses({
+	BlackJackTestSuite.Task1Test.class,
+	BlackJackTestSuite.Task2Test.class,
 // BlackJackTestSuite.Task3Test.class,
 // BlackJackTestSuite.Task4Test.class,
 // BlackJackTestSuite.YourTests.class

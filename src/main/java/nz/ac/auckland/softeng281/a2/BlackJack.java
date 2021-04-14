@@ -13,7 +13,7 @@ public class BlackJack {
 
 	public BlackJack() {
 		players = new ArrayList<>();
-		dealer = null; // FIXME Task 2
+		dealer = new BotDealer("Dealer", players); // FIXME Task 2 - Failure 1, created dealer instance
 		players.add(new HumanPlayer("Player1"));
 		// ADDHERE Task 1 - Failure 1, Created 2 test bots in players array list.
 		players.add(new BotPlayer("Bot1"));
@@ -51,7 +51,8 @@ public class BlackJack {
 			for (Participant player : players) {
 				player.play(deck);
 			}
-			// ADDHERE Task 2
+			// ADDHERE Task 2 - Failure 1, made dealer play after players and before winner check.
+			dealer.play(deck);
 			checkWinner();
 			System.out.println("Do you want to play again?");
 			result = Utils.scanner.next();
