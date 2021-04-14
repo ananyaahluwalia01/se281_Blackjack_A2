@@ -26,7 +26,7 @@ import static org.junit.Assert.fail;
 	BlackJackTestSuite.Task1Test.class,
 	BlackJackTestSuite.Task2Test.class,
 	BlackJackTestSuite.Task3Test.class,
-// BlackJackTestSuite.Task4Test.class,
+	BlackJackTestSuite.Task4Test.class,
 // BlackJackTestSuite.YourTests.class
 })
 public class BlackJackTestSuite {
