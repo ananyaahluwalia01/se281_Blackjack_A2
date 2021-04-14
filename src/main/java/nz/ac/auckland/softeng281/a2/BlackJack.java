@@ -66,9 +66,26 @@ public class BlackJack {
 
 	public void checkWinner() {
 		// TODO Task 3
+		// Creates an array of the total scores each player has
+		int[] scores = new int[players.size()];
+		for (int i=0; i < players.size(); i++) {
+			scores[i] = players.get(i).getCurrentHand().getScore();
+		}
+		// Finds total score of dealer
+		int d = dealer.getCurrentHand().getScore();
+		System.out.println(d + " is the dealer score");
+		
+		// Compares dealer's and players' hands and outputs the winner.
+		int i=0;
 		for (Participant player : players) { // KEEPTHIS
 			// ADDHERE
-			// System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
+			System.out.println(scores[i] + " is the score");
+			if ((scores[i] >= d) && (scores[i] <= 21)) {
+				System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
+			} else if ((d > 21) && (scores[i] <= 21)) {
+				System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
+			}
+			i++;
 		}
 	}
 

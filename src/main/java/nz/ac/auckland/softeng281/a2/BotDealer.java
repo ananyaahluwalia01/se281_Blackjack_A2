@@ -12,22 +12,24 @@ public class BotDealer extends Participant {
 
 	public BotDealer(String name, List<Participant> players) {
 		super(name);
+		// ADDHERE Task 2 - So that we can access players array.
 		this.players = players;
-		// ADDHERE
 	}
 
 	@Override
 	public Action decideAction() {
-		// TODO
+		// TODO Task 2 - Wrote decideAction method
 		
+		// Creates an array of the total scores each player has
 		int[] scores = new int[players.size()];
-
 		for (int i=0; i < players.size(); i++) {
 			scores[i] = players.get(i).getCurrentHand().getScore();
 		}
 		
+		// Finds the dealers current score.
 		int d = getCurrentHand().getScore();
 		
+		// Checks how many players have a better hand than the dealer
 		int playersBetter = 0;
 		
 		for (int j = 0; j < players.size(); j++){
@@ -36,6 +38,7 @@ public class BotDealer extends Participant {
 			} 
 		}
    
+		// If 2 or more players have a better hand than the dealer, then the dealer hits, else they hold.
 		if (playersBetter >= 2) {
 			return Action.HIT;
 		} else {
