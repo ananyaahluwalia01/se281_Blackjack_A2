@@ -421,6 +421,42 @@ public class BlackJackTestSuite {
             assertTrue("Bot2 won, you should print \"Bot2 wins\"", myOut.toString().contains("Bot2 wins"));
             assertTrue("Bot3 won, you should  print \"Bot3 wins\"", myOut.toString().contains("Bot3 wins"));
         }
+        
+        // Ananya Test
+        @Test
+        public void testOnePlayerEqualAndOnePlayerWinAndOnePlayerBust() {
+            HandFactory.addHand(players.get(0), 10, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TWO, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+            HandFactory.addHand(players.get(1), 10, new Card(Card.Rank.NINE, Card.Suit.CLUBS),
+            		new Card(Card.Rank.THREE, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+            HandFactory.addHand(players.get(2), 10, new Card(Card.Rank.TEN, Card.Suit.CLUBS),
+                    new Card(Card.Rank.ACE, Card.Suit.CLUBS));
+            HandFactory.addHand(dealer, 10, new Card(Card.Rank.KING, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+            game.checkWinner();
+
+            assertFalse("Bot1 didn't won, you should not print \"Bot1 wins\"", myOut.toString().contains("Bot1 wins"));
+            assertFalse("Bot2 didn't won, you should not print \"Bot2 wins\"", myOut.toString().contains("Bot2 wins"));
+            assertTrue("Bot3 won, you should print \"Bot3 wins\"", myOut.toString().contains("Bot3 wins"));
+        }
+        
+     // Ananya Test
+        @Test
+        public void testAllPlayersAndDealerBlackJack() {
+            HandFactory.addHand(players.get(0), 10, new Card(Card.Rank.JACK, Card.Suit.CLUBS),
+                    new Card(Card.Rank.ACE, Card.Suit.CLUBS));
+            HandFactory.addHand(players.get(1), 10, new Card(Card.Rank.ACE, Card.Suit.CLUBS),
+            		new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+            HandFactory.addHand(players.get(2), 10, new Card(Card.Rank.TEN, Card.Suit.CLUBS),
+                    new Card(Card.Rank.ACE, Card.Suit.CLUBS));
+            HandFactory.addHand(dealer, 10, new Card(Card.Rank.KING, Card.Suit.CLUBS),
+                    new Card(Card.Rank.ACE, Card.Suit.CLUBS));
+            game.checkWinner();
+
+            assertTrue("Bot1 didn't won, you should not print \"Bot1 wins\"", myOut.toString().contains("Bot1 wins"));
+            assertTrue("Bot2 didn't won, you should not print \"Bot2 wins\"", myOut.toString().contains("Bot2 wins"));
+            assertTrue("Bot3 won, you should print \"Bot3 wins\"", myOut.toString().contains("Bot3 wins"));
+        }
 
     }
 

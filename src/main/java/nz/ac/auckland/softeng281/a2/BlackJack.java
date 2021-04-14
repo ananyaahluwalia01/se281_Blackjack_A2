@@ -73,16 +73,18 @@ public class BlackJack {
 		}
 		// Finds total score of dealer
 		int d = dealer.getCurrentHand().getScore();
-		System.out.println(d + " is the dealer score");
+		System.out.println(d + " is the dealer score"); // DELETE
 		
-		// Compares dealer's and players' hands and outputs the winner.
+		// Compares dealer's and players' hands
 		int i=0;
 		for (Participant player : players) { // KEEPTHIS
 			// ADDHERE
-			System.out.println(scores[i] + " is the score");
-			if ((scores[i] >= d) && (scores[i] <= 21)) {
+			System.out.println(scores[i] + " is the score"); // DELETE
+			if ((scores[i] > d) && (scores[i] < 21)) {
 				System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
-			} else if ((d > 21) && (scores[i] <= 21)) {
+			} else if ((d > 21) && (scores[i] < 21)) {
+				System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
+			} else if (scores[i] == 21) {
 				System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
 			}
 			i++;
