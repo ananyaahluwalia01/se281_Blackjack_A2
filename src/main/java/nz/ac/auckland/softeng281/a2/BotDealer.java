@@ -20,9 +20,9 @@ public class BotDealer extends Participant {
 	public Action decideAction() {
 		// TODO
 		
-		int[] scores = new int[players.size() - 1];
+		int[] scores = new int[players.size()];
 
-		for (int i=0; i < players.size()-1; i++) {
+		for (int i=0; i < players.size(); i++) {
 			scores[i] = players.get(i).getCurrentHand().getScore();
 		}
 		
@@ -30,10 +30,10 @@ public class BotDealer extends Participant {
 		
 		int playersBetter = 0;
 		
-		for (int j = 0; j < players.size()-1; j++){
-			if(d < scores[j]) {
+		for (int j = 0; j < players.size(); j++){
+			if((d < scores[j]) && (scores[j] <= 21) || (d > 21)) {
 				playersBetter++;
-			}
+			} 
 		}
    
 		if (playersBetter >= 2) {
