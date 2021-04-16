@@ -83,7 +83,7 @@ public class BlackJack {
 				System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
 			} else if ((d > 21) && (scores[i] < 21)) {
 				System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
-			} else if (scores[i] == 21) {
+			} else if ((scores[i] == 21) && (players.get(i).getCurrentHand().getCards().size() == 2)) {
 				System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
 			}
 			i++;
@@ -99,24 +99,32 @@ public class BlackJack {
 		int[][] scores = new int[gamesPlayed][players.size()];
 		int[] dealerScores = new int[gamesPlayed];
 		
-		//for (int counterGame = 0; counterGame < gamesPlayed; counterGame++) {
-		//	dealerScores[counterGame] = dealer.getHands()
-		//}
+		for (int counterGame = 0; counterGame < gamesPlayed; counterGame++) {
+			dealerScores[counterGame] = dealer.getHands().get(counterGame).getScore();
+		}
 		
 		int counterPlayer = 0;
+
 		
 		for (Participant player : players) {
 			for (int counterGame = 0; counterGame < gamesPlayed; counterGame++) {
 				int scoreForThatGame = players.get(counterPlayer).getHands().get(counterGame).getScore();
 				scores[counterGame][counterPlayer] = scoreForThatGame;
-				System.out.println("this player's " + counterPlayer + " score for game " + counterGame + " is " + scores[counterGame][counterPlayer]);
-				
+				System.out.println("this player's " + counterPlayer + " score for game " + counterGame + " is " + scores[counterGame][counterPlayer]);	
 			
+				if ((scores[counterGame][counterPlayer] > dealerScores[counterGame]) && (scores[counterGame][counterPlayer] < 21))  {
+					
+				} else if ((dealerScores[counterGame] > 21) && (scores[counterGame][counterPlayer] < 21)) {
+					
+				} else if ((scores[counterGame][counterPlayer] == 21) && (players.get(counterPlayer).getHands().get(counterGame).getCards().size() == 2)) {
+						System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
+				}
+							
 			}
 			counterPlayer++;
 		}
-		
-		
+
+	
 		
 		
 		//String this.name = name;
