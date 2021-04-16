@@ -92,6 +92,37 @@ public class BlackJack {
 
 	public void printPlayerHighestGain() {
 		// TODO Task 4
+		
+		int gamesPlayed = players.get(0).getHands().size();
+		
+		// Create an array where each row is a different player and each column is a different game.
+		int[][] scores = new int[gamesPlayed][players.size()];
+		int[] dealerScores = new int[gamesPlayed];
+		
+		//for (int counterGame = 0; counterGame < gamesPlayed; counterGame++) {
+		//	dealerScores[counterGame] = dealer.getHands()
+		//}
+		
+		int counterPlayer = 0;
+		
+		for (Participant player : players) {
+			for (int counterGame = 0; counterGame < gamesPlayed; counterGame++) {
+				int scoreForThatGame = players.get(counterPlayer).getHands().get(counterGame).getScore();
+				scores[counterGame][counterPlayer] = scoreForThatGame;
+				System.out.println("this player's " + counterPlayer + " score for game " + counterGame + " is " + scores[counterGame][counterPlayer]);
+				
+			
+			}
+			counterPlayer++;
+		}
+		
+		
+		
+		
+		//String this.name = name;
+				
+		//double totalGain = ; 
+		
 		// System.out.println("The player with the highest gain is: " + name + " with "
 		// + totalGain + " chips"); // UNCOMMENT AND KEEPTHIS
 	}
