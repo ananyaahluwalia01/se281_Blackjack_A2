@@ -79,9 +79,9 @@ public class BlackJack {
 		for (Participant player : players) { // KEEPTHIS
 			// ADDHERE
 
-			if ((scores[i] > d) && (scores[i] < 21)) {
+			if ((scores[i] > d) && (scores[i] <= 21)) {
 				System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
-			} else if ((d > 21) && (scores[i] < 21)) {
+			} else if ((d > 21) && (scores[i] <= 21)) {
 				System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
 			} else if ((scores[i] == 21) && (players.get(i).getCurrentHand().getCards().size() == 2)) {
 				System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
@@ -105,7 +105,6 @@ public class BlackJack {
 		
 		int counterPlayer = 0;
 		double[] balance = new double[players.size()]; 
-
 		
 		for (Participant player : players) {
 		
@@ -117,27 +116,30 @@ public class BlackJack {
 				System.out.println("this player's " + counterPlayer + " score for game " + counterGame + " is " + scores[counterGame][counterPlayer]);	
 				
 				double betForGame = players.get(counterPlayer).getHands().get(counterGame).getBet();
-				balance[counterPlayer] = balance[counterPlayer] + betForGame;
 				
-				if (((scores[counterGame][counterPlayer] > dealerScores[counterGame]) && (scores[counterGame][counterPlayer] < 21)) || ((dealerScores[counterGame] > 21) && (scores[counterGame][counterPlayer] < 21))) {
+				if (((scores[counterGame][counterPlayer] > dealerScores[counterGame]) && (scores[counterGame][counterPlayer] <= 21)) || ((dealerScores[counterGame] > 21) && (scores[counterGame][counterPlayer] <= 21))) {
 					balance[counterPlayer] = balance[counterPlayer] + betForGame;
 				} else if ((scores[counterGame][counterPlayer] == 21) && (players.get(counterPlayer).getHands().get(counterGame).getCards().size() == 2)) {
-					balance[counterPlayer] = balance[counterPlayer] + betForGame*1.5; 
+					balance[counterPlayer] = balance[counterPlayer] + betForGame * 1.5; 
 				} else {
 					balance[counterPlayer] = balance[counterPlayer] - betForGame;
 				}
 			}
 			counterPlayer++;
 		}
-
-	
+		
+		int highestGain = 0;
+		for (counterPlayer = 0; counterPlayer < players.size(); counterPlayer++) {
+			if (balance[counterPlayer] > balance[highestGain]) {
+				highestGain = counterPlayer;
+			}
+		}
 		
 		
-		//String this.name = name;
-				
-		//double totalGain = ; 
+		String name = players.get(highestGain).getName();
+		double totalGain = balance[highestGain]; 
 		
-		// System.out.println("The player with the highest gain is: " + name + " with "
-		// + totalGain + " chips"); // UNCOMMENT AND KEEPTHIS
+		System.out.println("The player with the highest gain is: " + name + " with "
+		 + totalGain + " chips"); // UNCOMMENT AND KEEPTHIS
 	}
 } 
