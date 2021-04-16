@@ -18,6 +18,11 @@ public class Hand {
 		score = 0;
 	}
 
+	// METHOD ADDED BY ANANYA
+	public int getBet() {
+		return bet;
+	}
+	
 	public int getScore() {
 		return score;
 	}

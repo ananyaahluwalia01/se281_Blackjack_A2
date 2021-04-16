@@ -104,22 +104,28 @@ public class BlackJack {
 		}
 		
 		int counterPlayer = 0;
+		double[] balance = new double[players.size()]; 
 
 		
 		for (Participant player : players) {
+		
 			for (int counterGame = 0; counterGame < gamesPlayed; counterGame++) {
+				
 				int scoreForThatGame = players.get(counterPlayer).getHands().get(counterGame).getScore();
 				scores[counterGame][counterPlayer] = scoreForThatGame;
+				
 				System.out.println("this player's " + counterPlayer + " score for game " + counterGame + " is " + scores[counterGame][counterPlayer]);	
-			
-				if ((scores[counterGame][counterPlayer] > dealerScores[counterGame]) && (scores[counterGame][counterPlayer] < 21))  {
-					
-				} else if ((dealerScores[counterGame] > 21) && (scores[counterGame][counterPlayer] < 21)) {
-					
+				
+				double betForGame = players.get(counterPlayer).getHands().get(counterGame).getBet();
+				balance[counterPlayer] = balance[counterPlayer] + betForGame;
+				
+				if (((scores[counterGame][counterPlayer] > dealerScores[counterGame]) && (scores[counterGame][counterPlayer] < 21)) || ((dealerScores[counterGame] > 21) && (scores[counterGame][counterPlayer] < 21))) {
+					balance[counterPlayer] = balance[counterPlayer] + betForGame;
 				} else if ((scores[counterGame][counterPlayer] == 21) && (players.get(counterPlayer).getHands().get(counterGame).getCards().size() == 2)) {
-						System.out.println(player.getName() + " wins"); // UNCOMMENT AND KEEPTHIS
+					balance[counterPlayer] = balance[counterPlayer] + betForGame*1.5; 
+				} else {
+					balance[counterPlayer] = balance[counterPlayer] - betForGame;
 				}
-							
 			}
 			counterPlayer++;
 		}
