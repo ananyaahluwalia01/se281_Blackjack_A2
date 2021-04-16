@@ -111,13 +111,10 @@ public class BlackJack {
 				
 				scores[counterGame][counterPlayer] = player.getHands().get(counterGame).getScore();
 				
-				System.out.println("this player's " + counterPlayer + " score for game " + counterGame + " is " + scores[counterGame][counterPlayer]);	
-				
 				double betForGame = player.getHands().get(counterGame).getBet();
 				
 				if (player.getHands().get(counterGame).isBlackJack()) {
 					balance[counterPlayer] = balance[counterPlayer] + (betForGame * 1.5);
-					System.out.println("BLACKJACK this player's " + counterPlayer + " balance after game " + counterGame + " is " + balance[counterPlayer]);
 				} else if (((scores[counterGame][counterPlayer] > dealerScores[counterGame]) && (scores[counterGame][counterPlayer] <= 21)) || ((dealerScores[counterGame] > 21) && (scores[counterGame][counterPlayer] <= 21))) {
 					balance[counterPlayer] = balance[counterPlayer] + betForGame;	
 				} else {
@@ -138,7 +135,6 @@ public class BlackJack {
 		String name = players.get(highestGain).getName();
 		double totalGain = balance[highestGain]; 
 		
-		System.out.println("The player with the highest gain is: " + name + " with "
-		 + totalGain + " chips"); // UNCOMMENT AND KEEPTHIS
+		System.out.println("The player with the highest gain is: " + name + " with " + totalGain + " chips"); // UNCOMMENT AND KEEPTHIS
 	}
 } 

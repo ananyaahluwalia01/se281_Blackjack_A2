@@ -27,7 +27,7 @@ import static org.junit.Assert.fail;
 	BlackJackTestSuite.Task2Test.class,
 	BlackJackTestSuite.Task3Test.class,
 	BlackJackTestSuite.Task4Test.class,
-// BlackJackTestSuite.YourTests.class
+	BlackJackTestSuite.YourTests.class
 })
 public class BlackJackTestSuite {
     @FixMethodOrder(MethodSorters.JVM)
@@ -660,11 +660,132 @@ public class BlackJackTestSuite {
     }
 
     public static class YourTests {
+    	Participant dealer;
+        List<Participant> players;
+        BlackJack game;
+        ByteArrayOutputStream myOut;
+        PrintStream origOut;
 
+        @Before
+        public void setUp() {
+            players = new ArrayList<>();
+            players.add(new BotPlayer("Bot1"));
+            players.add(new BotPlayer("Bot2"));
+            players.add(new BotPlayer("Bot3"));
+            dealer = new BotDealer("Dealer", players);
+            game = new BlackJack();
+            game.setPlayers(players);
+            game.setDealer(dealer);
+            origOut = System.out;
+            myOut = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(myOut));
+        }
+
+        @After
+        public void tearDown() {
+            System.setOut(origOut);
+            if (myOut.toString().length() > 1) {
+                System.out.println(System.lineSeparator() + "the System.out.print was :" + System.lineSeparator()
+                        + myOut.toString());
+            }
+        }
+        
         @Test
         public void test1() {
             assertTrue(true);
         }
+        
+        // Ananya test 1
+        @Test
+        public void testingNegativeGain() {
+            // lose 100
+            HandFactory.addHand(players.get(0), 100, new Card(Card.Rank.FOUR, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TWO, Card.Suit.CLUBS), new Card(Card.Rank.EIGHT, Card.Suit.CLUBS));
+            HandFactory.addHand(players.get(1), 110, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(players.get(2), 200, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(dealer, 10, new Card(Card.Rank.TEN, Card.Suit.DIAMONDS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+            game.checkWinner();
+
+            // win 10
+            HandFactory.addHand(players.get(0), 10, new Card(Card.Rank.ACE, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.DIAMONDS));
+            HandFactory.addHand(players.get(1), 10, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(players.get(2), 1, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(dealer, 10, new Card(Card.Rank.TEN, Card.Suit.DIAMONDS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+            game.checkWinner();
+
+            game.printPlayerHighestGain();
+            assertTrue("Bot1 should have the highest gain",
+                    myOut.toString().contains("The player with the highest gain is: Bot1 with -90.0 chips"));
+        }
+        
+        
+        // Ananya test 2
+        @Test
+        public void testingZeroGain() {
+            // lose 100
+            HandFactory.addHand(players.get(0), 100, new Card(Card.Rank.FOUR, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TWO, Card.Suit.CLUBS), new Card(Card.Rank.EIGHT, Card.Suit.CLUBS));
+            HandFactory.addHand(players.get(1), 110, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(players.get(2), 200, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(dealer, 10, new Card(Card.Rank.TEN, Card.Suit.DIAMONDS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+            game.checkWinner();
+
+            // win 10
+            HandFactory.addHand(players.get(0), 100, new Card(Card.Rank.ACE, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.DIAMONDS));
+            HandFactory.addHand(players.get(1), 10, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(players.get(2), 1, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(dealer, 10, new Card(Card.Rank.TEN, Card.Suit.DIAMONDS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+            game.checkWinner();
+
+            game.printPlayerHighestGain();
+            assertTrue("Bot1 should have the highest gain",
+                    myOut.toString().contains("The player with the highest gain is: Bot1 with 0.0 chips"));
+        }
+        
+        // Ananya test 3
+        @Test
+        public void testingAllTheSameGain() {
+            // lose 10
+            HandFactory.addHand(players.get(0), 10, new Card(Card.Rank.FOUR, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TWO, Card.Suit.CLUBS), new Card(Card.Rank.EIGHT, Card.Suit.CLUBS));
+            HandFactory.addHand(players.get(1), 10, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(players.get(2), 10, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(dealer, 10, new Card(Card.Rank.ACE, Card.Suit.DIAMONDS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+            game.checkWinner();
+
+            // win 100
+            HandFactory.addHand(players.get(0), 100, new Card(Card.Rank.TEN, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+            HandFactory.addHand(players.get(1), 100, new Card(Card.Rank.ACE, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(players.get(2), 100, new Card(Card.Rank.ACE, Card.Suit.CLUBS),
+                    new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
+            HandFactory.addHand(dealer, 10, new Card(Card.Rank.TEN, Card.Suit.DIAMONDS),
+                    new Card(Card.Rank.EIGHT, Card.Suit.CLUBS));
+            game.checkWinner();
+
+            game.printPlayerHighestGain();
+            assertTrue("Bot1 should have the highest gain",
+                    myOut.toString().contains("The player with the highest gain is: Bot1 with 90.0 chips"));
+        }
+
 
     }
 
