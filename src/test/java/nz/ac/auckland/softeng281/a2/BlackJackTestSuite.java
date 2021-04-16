@@ -422,7 +422,7 @@ public class BlackJackTestSuite {
             assertTrue("Bot3 won, you should  print \"Bot3 wins\"", myOut.toString().contains("Bot3 wins"));
         }
         
-        // Ananya Test
+        // Ananya's Test
         @Test
         public void testOnePlayerEqualAndOnePlayerWinAndOnePlayerBust() {
             HandFactory.addHand(players.get(0), 10, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
