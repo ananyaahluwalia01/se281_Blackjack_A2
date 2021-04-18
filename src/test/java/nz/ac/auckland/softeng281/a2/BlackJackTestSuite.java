@@ -760,7 +760,7 @@ public class BlackJackTestSuite {
         @Test
         public void testingAllTheSameGain() {
             // lose 10
-            HandFactory.addHand(players.get(0), 0, new Card(Card.Rank.FOUR, Card.Suit.CLUBS),
+            HandFactory.addHand(players.get(0), 10, new Card(Card.Rank.FOUR, Card.Suit.CLUBS),
                     new Card(Card.Rank.TWO, Card.Suit.CLUBS), new Card(Card.Rank.EIGHT, Card.Suit.CLUBS));
             HandFactory.addHand(players.get(1), 10, new Card(Card.Rank.EIGHT, Card.Suit.CLUBS),
                     new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
@@ -771,7 +771,7 @@ public class BlackJackTestSuite {
             game.checkWinner();
 
             // win 100
-            HandFactory.addHand(players.get(0), 110, new Card(Card.Rank.TEN, Card.Suit.CLUBS),
+            HandFactory.addHand(players.get(0), 100, new Card(Card.Rank.TEN, Card.Suit.CLUBS),
                     new Card(Card.Rank.TEN, Card.Suit.CLUBS));
             HandFactory.addHand(players.get(1), 100, new Card(Card.Rank.ACE, Card.Suit.CLUBS),
                     new Card(Card.Rank.TEN, Card.Suit.CLUBS), new Card(Card.Rank.TEN, Card.Suit.HEARTS));
